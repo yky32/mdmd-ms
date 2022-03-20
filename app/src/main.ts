@@ -2,6 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import {AppConfigService} from "./config/configuration.service";
+
 
 async function bootstrap() {
   // Init fasitfy
@@ -18,12 +20,14 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);
 
+  const appConfigService = app.get(AppConfigService);
 
   // Enable CORS
   app.enableCors();
 
   // Start server
-  await app.listen(3000);
+  await app.listen(appConfigService.port);
+  console.log("[%s] is running... in port: [%s]", appConfigService.name, appConfigService.port)
 }
 
 // Start server

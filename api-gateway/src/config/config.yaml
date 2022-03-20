@@ -1,7 +1,7 @@
 app:
-  name: 'app-mdmd'
-  host: 'localhost'
-  port: 3001
+  name: 'api-gateway'
+  host: 'localhostaaaaaaaaaaaaaaaaaaaaaaa'
+  port: 3000
 
 db:
   postgres:
