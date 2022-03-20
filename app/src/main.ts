@@ -1,33 +1,24 @@
-import { NestFactory } from '@nestjs/core';
-import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
-import { AppModule } from './app.module';
-import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import {AppConfigService} from "./config/configuration.service";
+import {NestFactory} from '@nestjs/core';
+import {AppModule} from './app.module';
+import {MicroserviceOptions, Transport} from "@nestjs/microservices";
 
 
 async function bootstrap() {
-  // Init fasitfy
-  const app = await NestFactory.create<NestFastifyApplication>(
-    AppModule, new FastifyAdapter()
-  );
-
-  // Enable Swagger
-  const config = new DocumentBuilder()
-    .setTitle('api-mdmd.app')
-    .setDescription('mdmd api documents')
-    .setVersion('1.0')
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('swagger', app, document);
-
-  const appConfigService = app.get(AppConfigService);
-
-  // Enable CORS
-  app.enableCors();
-
-  // Start server
-  await app.listen(appConfigService.port);
-  console.log("[%s] is running... in port: [%s]", appConfigService.name, appConfigService.port)
+    const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+        AppModule,
+        {
+            transport: Transport.KAFKA,
+            options: {
+                client: {
+                    brokers: ['yky32.asuscomm.com:9092'],
+                },
+                consumer: {
+                    groupId: 'app-consumer',
+                },
+            },
+        },
+    );
+    app.listen();
 }
 
 // Start server
