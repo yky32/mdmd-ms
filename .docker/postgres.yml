@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  postgres_mdmd:
+    container_name: postgres-mdmd
+    image: 'postgres:10.10-alpine'
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB: 'clear-junction-gateway'
+    volumes:
+      - 'postgres_mdmd:/var/lib/postgresql/data'
+    ports:
+      - '${POSTGRES_PORT:-5432}:5432'
+
+volumes:
+  postgres_mdmd:
