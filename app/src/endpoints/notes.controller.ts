@@ -1,8 +1,8 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { NotesService } from './notes.service';
-import { CreateNoteDto } from './dto/create-note.dto';
-import { UpdateNoteDto } from './dto/update-note.dto';
+import { NotesService } from '../modules/notes/notes.service';
+import { CreateNoteDto } from '../modules/notes/dto/create-note.dto';
+import { UpdateNoteDto } from '../modules/notes/dto/update-note.dto';
 
 @Controller()
 export class NotesController {
