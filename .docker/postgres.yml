@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 'postgres'
-      POSTGRES_DB: 'clear-junction-gateway'
+      POSTGRES_DB: 'mdmd'
     volumes:
       - 'postgres_mdmd:/var/lib/postgresql/data'
     ports:
