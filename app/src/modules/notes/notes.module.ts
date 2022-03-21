@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { NotesService } from './notes.service';
-import { NotesController } from '../../endpoints/notes.controller';
+import { NotesController } from './notes.controller';
 
 @Module({
   controllers: [NotesController],
