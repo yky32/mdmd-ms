@@ -1,26 +1,32 @@
-import { Injectable } from '@nestjs/common';
-import { CreateNoteDto } from './dto/create-note.dto';
-import { UpdateNoteDto } from './dto/update-note.dto';
+import {Inject, Injectable} from '@nestjs/common';
+import {CreateNoteDto} from './dto/create-note.dto';
+import {UpdateNoteDto} from './dto/update-note.dto';
+import {NOTE_REPOSITORY} from "../../core/constants";
+import {Note} from "./note.entity";
 
 @Injectable()
 export class NotesService {
-  create(createNoteDto: CreateNoteDto) {
-    return 'This action adds a new note';
-  }
 
-  findAll() {
-    return `This action returns all notes`;
-  }
+    constructor(@Inject(NOTE_REPOSITORY) private readonly noteRepository: typeof Note) {
+    }
 
-  findOne(id: number) {
-    return `This action returns a #${id} note`;
-  }
+    create(createNoteDto: CreateNoteDto) {
+        return this.noteRepository.create<Note>(createNoteDto);
+    }
 
-  update(id: number, updateNoteDto: UpdateNoteDto) {
-    return `This action updates a #${id} note`;
-  }
+    findAll() {
+        return `This action returns all notes`;
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} note`;
-  }
+    findOne(id: number) {
+        return `This action returns a #${id} note`;
+    }
+
+    update(id: number, updateNoteDto: UpdateNoteDto) {
+        return `This action updates a #${id} note`;
+    }
+
+    remove(id: number) {
+        return `This action removes a #${id} note`;
+    }
 }
