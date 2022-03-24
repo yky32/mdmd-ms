@@ -11,7 +11,7 @@ services:
     volumes:
       - 'postgres_mdmd:/var/lib/postgresql/data'
     ports:
-      - '${POSTGRES_PORT:-5432}:5432'
+      - '${POSTGRES_PORT:-5435}:5432'
 
 volumes:
   postgres_mdmd:
