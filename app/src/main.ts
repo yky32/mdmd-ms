@@ -10,15 +10,19 @@ async function bootstrap() {
             transport: Transport.KAFKA,
             options: {
                 client: {
-                    brokers: ['localhost:9092'],
+                    clientId: 'app-client',
+                    brokers: ['yky32.asuscomm.com:9092'],
                 },
                 consumer: {
-                    groupId: 'app-consumer',
+                    groupId: 'billing-consumer',
+                },
+                subscribe: {
+                    fromBeginning: false,
                 },
             },
         },
     );
-    app.listen();
+    await app.listen();
 }
 
 // Start server

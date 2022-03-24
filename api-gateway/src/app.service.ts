@@ -4,7 +4,7 @@ import {ClientKafka} from "@nestjs/microservices";
 
 @Injectable()
 export class AppService {
-    constructor(private appConfigService: AppConfigService, @Inject('APP_SERVICE') private readonly appClient: ClientKafka,) {
+    constructor(private appConfigService: AppConfigService, @Inject('BILLING_SERVICE') private readonly appClient: ClientKafka,) {
     }
 
     getHello(): string {

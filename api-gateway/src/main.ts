@@ -20,12 +20,12 @@ async function bootstrap() {
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('swagger', app, document);
 
-    const appConfigService = app.get(AppConfigService);
-
     // Enable CORS
     app.enableCors();
 
     // Start server
+    const appConfigService = app.get(AppConfigService);
+    await app.startAllMicroservices();
     await app.listen(appConfigService.port);
     console.log("[%s] is running... in port: [%s]", appConfigService.name, appConfigService.port)
 }

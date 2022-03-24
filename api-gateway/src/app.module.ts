@@ -10,15 +10,15 @@ import LogsMiddleware from "./common/middleware/logs.middleware";
     imports: [
         ClientsModule.register([
             {
-                name: 'APP_SERVICE',
+                name: 'BILLING_SERVICE',
                 transport: Transport.KAFKA,
                 options: {
                     client: {
-                        clientId: 'app',
-                        brokers: ['localhost:9092'],
+                        clientId: 'billing',
+                        brokers: ['yky32.asuscomm.com:9092'],
                     },
                     consumer: {
-                        groupId: 'app-consumer',
+                        groupId: 'billing-consumer',
                     },
                 },
             },
