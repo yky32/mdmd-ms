@@ -15,7 +15,7 @@ import LogsMiddleware from "./common/middleware/logs.middleware";
                 options: {
                     client: {
                         clientId: 'billing',
-                        brokers: ['yky32.asuscomm.com:9092'],
+                        brokers: ['yky32.asuscomm.com:29092'],
                     },
                     consumer: {
                         groupId: 'billing-consumer',

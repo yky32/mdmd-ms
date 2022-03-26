@@ -11,7 +11,7 @@ async function bootstrap() {
             options: {
                 client: {
                     clientId: 'app-client',
-                    brokers: ['yky32.asuscomm.com:9092'],
+                    brokers: ['yky32.asuscomm.com:29092'],
                 },
                 consumer: {
                     groupId: 'billing-consumer',

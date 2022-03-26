@@ -15,7 +15,7 @@ import {ClientsModule, Transport} from "@nestjs/microservices";
                 options: {
                     client: {
                         clientId: 'auth',
-                        brokers: ['yky32.asuscomm.com:9092'],
+                        brokers: ['yky32.asuscomm.com:29092'],
                     },
                     consumer: {
                         groupId: 'auth-consumer',
