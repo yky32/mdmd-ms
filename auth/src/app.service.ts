@@ -19,6 +19,7 @@ export class AppService {
   }
 
   getUser(getUserRequest: GetUserRequest) {
+    console.log(getUserRequest)
     return this.users.find((user) => user.userId === getUserRequest.userId);
   }
 }

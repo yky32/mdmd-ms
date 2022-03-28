@@ -4,11 +4,16 @@ import {UpdateNoteDto} from './dto/update-note.dto';
 import {NOTE_REPOSITORY} from "../../core/constants";
 import {Note} from "./note.entity";
 import {NoteCreatedEvent} from "./dto/event/note-created.event";
+import {ClientKafka} from "@nestjs/microservices";
+import {GetUserRequest} from "./dto/get-user-request.dto";
 
 @Injectable()
 export class NotesService {
 
-    constructor(@Inject(NOTE_REPOSITORY) private readonly noteRepository: typeof Note) {
+    constructor(
+        @Inject(NOTE_REPOSITORY) private readonly noteRepository: typeof Note,
+        @Inject("AUTH_SERVICE") private readonly authClient: ClientKafka,
+    ) {
     }
 
     create(createNoteDto: CreateNoteDto) {
@@ -33,5 +38,11 @@ export class NotesService {
 
     handleNoteCreated(noteCreatedEvent: NoteCreatedEvent) {
         console.log(noteCreatedEvent)
+        let userId = noteCreatedEvent.userId;
+        this.authClient
+            .send('get_user', new GetUserRequest(userId))
+            .subscribe((user) => {
+                console.log(`Billing user with ${user.stripeUserId} a price of ${noteCreatedEvent.price}`)
+            })
     }
 }
