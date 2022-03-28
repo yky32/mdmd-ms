@@ -3,6 +3,7 @@ import {CreateNoteDto} from './dto/create-note.dto';
 import {UpdateNoteDto} from './dto/update-note.dto';
 import {NOTE_REPOSITORY} from "../../core/constants";
 import {Note} from "./note.entity";
+import {NoteCreatedEvent} from "./dto/event/note-created.event";
 
 @Injectable()
 export class NotesService {
@@ -28,5 +29,9 @@ export class NotesService {
 
     remove(id: number) {
         return `This action removes a #${id} note`;
+    }
+
+    handleNoteCreated(noteCreatedEvent: NoteCreatedEvent) {
+        console.log(noteCreatedEvent)
     }
 }

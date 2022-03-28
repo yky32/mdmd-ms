@@ -8,21 +8,6 @@ import LogsMiddleware from "./common/middleware/logs.middleware";
 
 @Module({
     imports: [
-        ClientsModule.register([
-            {
-                name: 'BILLING_SERVICE',
-                transport: Transport.KAFKA,
-                options: {
-                    client: {
-                        clientId: 'billing',
-                        brokers: ['yky32.asuscomm.com:29092'],
-                    },
-                    consumer: {
-                        groupId: 'billing-consumer',
-                    },
-                },
-            },
-        ]),
         AppConfigModule,
         NotesModule
     ],

@@ -10,15 +10,11 @@ async function bootstrap() {
             transport: Transport.KAFKA,
             options: {
                 client: {
-                    clientId: 'app-client',
                     brokers: ['yky32.asuscomm.com:29092'],
                 },
                 consumer: {
                     groupId: 'billing-consumer',
-                },
-                subscribe: {
-                    fromBeginning: false,
-                },
+                }
             },
         },
     );

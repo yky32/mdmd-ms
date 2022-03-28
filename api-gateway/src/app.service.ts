@@ -1,10 +1,9 @@
-import {Inject, Injectable} from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import {AppConfigService} from "./config/configuration.service";
-import {ClientKafka} from "@nestjs/microservices";
 
 @Injectable()
 export class AppService {
-    constructor(private appConfigService: AppConfigService, @Inject('BILLING_SERVICE') private readonly appClient: ClientKafka,) {
+    constructor(private appConfigService: AppConfigService) {
     }
 
     getHello(): string {
