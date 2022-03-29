@@ -2,8 +2,7 @@ import {MiddlewareConsumer, Module} from "@nestjs/common";
 import {AppController} from "./app.controller";
 import {AppService} from "./app.service";
 import {AppConfigModule} from "./config/configuration.module";
-import {ClientsModule, Transport} from "@nestjs/microservices";
-import { NotesModule } from './modules/notes/notes.module';
+import {NotesModule} from './modules/notes/notes.module';
 import LogsMiddleware from "./common/middleware/logs.middleware";
 
 @Module({
