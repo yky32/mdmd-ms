@@ -4,4 +4,4 @@
 # DB Configuration
 `https://github.com/onwuvic/nest-blog-api` <br>
 #### connection url <br>
-``yky32.asuscomm.com:5435@mdmd   **mdmd/mdmd123!**``
+``**mdmd/mdmd123!**``
