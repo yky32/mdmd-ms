@@ -13,7 +13,7 @@ async function bootstrap() {
                     brokers: ['yky32.asuscomm.com:9092'],
                 },
                 consumer: {
-                    groupId: 'billing-consumer',
+                    groupId: 'app-consumer',
                 }
             },
         },

@@ -8,12 +8,12 @@ import {CreateNoteRequest} from "./dto/request/create-note.request";
 export class NotesService {
 
     constructor(
-        @Inject('BILLING_SERVICE') private readonly billingClient: ClientKafka,
+        @Inject('APP_SERVICE') private readonly appClient: ClientKafka,
     ) {
     }
 
     create({userId, price}: CreateNoteRequest) {
-        this.billingClient.emit('note_created', new NoteCreatedEvent('123', userId, price))
+        this.appClient.emit('note_created', new NoteCreatedEvent('123', userId, price))
     }
 
     findAll() {
