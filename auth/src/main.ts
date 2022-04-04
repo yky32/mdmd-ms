@@ -9,7 +9,7 @@ async function bootstrap() {
       transport: Transport.KAFKA,
       options: {
         client: {
-          brokers: ['yky32.asuscomm.com:29092'],
+          brokers: ['yky32.asuscomm.com:9092'],
         },
         consumer: {
           groupId: 'auth-consumer',
