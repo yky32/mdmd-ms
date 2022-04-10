@@ -8,8 +8,14 @@ export class Note extends Model<Note> {
     id: number;
 
     @Column({
-        type: DataType.STRING,
+        type: DataType.JSONB,
         allowNull: false,
     })
-    name: string;
+    meta: string;
+
+    @Column({
+        type: DataType.JSONB,
+        allowNull: false,
+    })
+    context: string;
 }
