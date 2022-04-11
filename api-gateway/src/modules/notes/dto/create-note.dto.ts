@@ -7,9 +7,9 @@ export class CreateNoteDto {
 
     toString() {
         return JSON.stringify({
-            orderId: this.title,
-            userId: this.description,
-            price: this.cover,
+            title: this.title,
+            description: this.description,
+            cover: this.cover,
         });
     }
 }

@@ -16,11 +16,17 @@ export class NotesService {
     ) {
     }
 
-    create(createNoteDto: CreateNoteDto) {
+    async create(createNoteDto: CreateNoteDto) {
         const note = new Note()
-        note.metadata = { title:"123", description:"123", cover:"123"} as NoteMetadata
-        note.context = { content: "123"} as NoteContext
-        return note.save()
+        note.metadata = {
+            title: createNoteDto.title,
+            description: createNoteDto.description,
+            cover: createNoteDto.cover
+        } as NoteMetadata
+
+        note.context = {content: "123"} as NoteContext
+        await note.save()
+        return note.get()
     }
 
     findAll() {
