@@ -21,10 +21,9 @@ export class NotesController implements OnModuleInit {
         this.notesService.handleNoteCreated(data.value);
     }
 
-
     @MessagePattern('createNote')
-    create(@Payload() createNoteDto: CreateNoteDto) {
-        return this.notesService.create(createNoteDto);
+    create(data: any) {
+        return this.notesService.create(data.value);
     }
 
     @MessagePattern('findAllNotes')

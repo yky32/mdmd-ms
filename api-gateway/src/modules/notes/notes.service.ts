@@ -1,8 +1,8 @@
 import {Inject, Injectable} from '@nestjs/common';
-import {NoteCreatedEvent} from './dto/event/note-created.event';
 import {UpdateNoteDto} from './dto/update-note.dto';
 import {ClientKafka} from "@nestjs/microservices";
 import {CreateNoteRequest} from "./dto/request/create-note.request";
+import {CreateNoteDto} from "./dto/create-note.dto";
 
 @Injectable()
 export class NotesService {
@@ -12,8 +12,12 @@ export class NotesService {
     ) {
     }
 
-    create({userId, price}: CreateNoteRequest) {
-        this.appClient.emit('note_created', new NoteCreatedEvent('123', userId, price))
+    create({title, description, cover}: CreateNoteRequest) {
+        this.appClient
+            .send('createNote', new CreateNoteDto(title, description, cover))
+            .subscribe((note) => {
+                console.log(`create_note ${note.id}`)
+            })
     }
 
     findAll() {

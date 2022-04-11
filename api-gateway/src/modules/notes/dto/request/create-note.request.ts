@@ -1,4 +1,5 @@
 export class CreateNoteRequest {
-    userId: string;
-    price: number;
+    title: string;
+    description: string;
+    cover: string;
 }

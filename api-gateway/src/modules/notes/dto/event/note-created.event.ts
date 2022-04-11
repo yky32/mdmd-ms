@@ -1,15 +1,15 @@
 export class NoteCreatedEvent {
     constructor(
-       public readonly noteId: String,
-       public readonly userId: String,
-       public readonly price: number,
+       public readonly title: String,
+       public readonly description: String,
+       public readonly cover: string,
     ) {}
 
     toString() {
         return JSON.stringify({
-            orderId: this.noteId,
-            userId: this.userId,
-            price: this.price,
+            orderId: this.title,
+            userId: this.description,
+            price: this.cover,
         });
     }
 }

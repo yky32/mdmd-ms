@@ -1,4 +1,4 @@
-import {Table, Column, Model, DataType, PrimaryKey, AutoIncrement} from 'sequelize-typescript';
+import {AutoIncrement, Column, CreatedAt, DataType, Model, PrimaryKey, Table, UpdatedAt} from 'sequelize-typescript';
 
 @Table
 export class Note extends Model<Note> {
@@ -11,11 +11,31 @@ export class Note extends Model<Note> {
         type: DataType.JSONB,
         allowNull: false,
     })
-    meta: string;
+    metadata: NoteMetadata;
 
     @Column({
         type: DataType.JSONB,
         allowNull: false,
     })
-    context: string;
+    context: NoteContext;
+
+    @CreatedAt
+    @Column({field: 'created_at'})
+    createdAt: Date;
+
+    @UpdatedAt
+    @Column({field: 'updated_at'})
+
+    updatedAt: Date;
+}
+
+
+export interface NoteMetadata {
+    title: string;
+    description: string;
+    cover: string;
+}
+
+export interface NoteContext {
+    content: string;
 }

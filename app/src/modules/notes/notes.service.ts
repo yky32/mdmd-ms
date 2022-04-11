@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@nestjs/common';
 import {CreateNoteDto} from './dto/create-note.dto';
 import {UpdateNoteDto} from './dto/update-note.dto';
 import {NOTE_REPOSITORY} from "../../core/constants";
-import {Note} from "./note.entity";
+import {Note, NoteContext, NoteMetadata} from "./note.entity";
 import {NoteCreatedEvent} from "./dto/event/note-created.event";
 import {ClientKafka} from "@nestjs/microservices";
 import {GetUserRequest} from "./dto/get-user-request.dto";
@@ -17,7 +17,10 @@ export class NotesService {
     }
 
     create(createNoteDto: CreateNoteDto) {
-        return this.noteRepository.create<Note>(createNoteDto);
+        const note = new Note()
+        note.metadata = { title:"123", description:"123", cover:"123"} as NoteMetadata
+        note.context = { content: "123"} as NoteContext
+        return note.save()
     }
 
     findAll() {
