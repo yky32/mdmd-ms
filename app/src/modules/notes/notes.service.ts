@@ -16,7 +16,7 @@ export class NotesService {
     ) {
     }
 
-    async create(createNoteDto: CreateNoteDto) {
+     create(createNoteDto: CreateNoteDto) {
         let note = new Note();
 
         note.metadata = {
@@ -29,7 +29,7 @@ export class NotesService {
             data: createNoteDto.content
         } as NoteContext
 
-        return await this.noteRepository.create<Note>(note);
+        return note.save();
     }
 
     findAll() {

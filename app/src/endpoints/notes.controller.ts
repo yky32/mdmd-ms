@@ -3,7 +3,6 @@ import {ClientKafka, EventPattern, MessagePattern, Payload} from '@nestjs/micros
 import {NotesService} from '../modules/notes/notes.service';
 import {CreateNoteDto} from '../modules/notes/dto/create-note.dto';
 import {UpdateNoteDto} from '../modules/notes/dto/update-note.dto';
-import {CreateNoteRequest} from "../../../api-gateway/src/modules/notes/dto/request/create-note.request";
 
 @Controller()
 export class NotesController implements OnModuleInit {
@@ -25,8 +24,7 @@ export class NotesController implements OnModuleInit {
     @MessagePattern('createNote')
     create(data: any) {
         console.log(`@MessagePattern('createNote') ${data}`)
-        let createNoteDto = data.value as CreateNoteDto
-        return this.notesService.create(createNoteDto);
+        return this.notesService.create(data.value as CreateNoteDto);
     }
 
     @MessagePattern('findAllNotes')
