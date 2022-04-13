@@ -11,4 +11,7 @@ export class CreateNoteRequest {
     @ApiProperty()
     @IsString()
     readonly cover: string;
+    @ApiProperty()
+    @IsString()
+    readonly content: string;
 }

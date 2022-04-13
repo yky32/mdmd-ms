@@ -12,9 +12,9 @@ export class NotesService {
     ) {
     }
 
-    create({title, description, cover}: CreateNoteRequest) {
+    create({title, description, cover, content}: CreateNoteRequest) {
         this.appClient
-            .send('createNote', new CreateNoteDto(title, description, cover))
+            .send('createNote', new CreateNoteDto(title, description, cover, content))
             .subscribe((note) => {
                 console.log(`note_created: ${note.id}`)
             })

@@ -37,5 +37,5 @@ export interface NoteMetadata {
 }
 
 export interface NoteContext {
-    content: string;
+    data: string;
 }

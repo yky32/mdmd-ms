@@ -1,8 +1,9 @@
 export class CreateNoteDto {
     constructor(
-       public readonly title: string,
-       public readonly description: string,
-       public readonly cover: string,
+        public readonly title: string,
+        public readonly description: string,
+        public readonly cover: string,
+        public readonly content: string
     ) {}
 
     toString() {
@@ -10,6 +11,7 @@ export class CreateNoteDto {
             title: this.title,
             description: this.description,
             cover: this.cover,
+            content: this.content
         });
     }
 }

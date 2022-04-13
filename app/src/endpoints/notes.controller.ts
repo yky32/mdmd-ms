@@ -25,8 +25,8 @@ export class NotesController implements OnModuleInit {
     @MessagePattern('createNote')
     create(data: any) {
         console.log(`@MessagePattern('createNote') ${data}`)
-        let note = data.value as CreateNoteDto
-        return this.notesService.create(note);
+        let createNoteDto = data.value as CreateNoteDto
+        return this.notesService.create(createNoteDto);
     }
 
     @MessagePattern('findAllNotes')
