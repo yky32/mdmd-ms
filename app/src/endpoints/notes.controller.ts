@@ -33,8 +33,9 @@ export class NotesController implements OnModuleInit {
     }
 
     @MessagePattern('findOneNote')
-    findOne(@Payload() id: number) {
-        return this.notesService.findOne(id);
+    findOne(data: any) {
+        console.log(`@MessagePattern('findOneNote') ${data}`)
+        return this.notesService.findOne(data.value as number);
     }
 
     @MessagePattern('updateNote')

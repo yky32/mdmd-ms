@@ -16,6 +16,7 @@ export class NotesController implements OnModuleInit{
 
     onModuleInit() {
         this.appClient.subscribeToResponseOf('createNote');
+        this.appClient.subscribeToResponseOf('findOneNote');
     }
 
     @Post()
@@ -29,8 +30,9 @@ export class NotesController implements OnModuleInit{
     }
 
     @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.notesService.findOne(+id);
+    async findOne(@Param('id') id: string) {
+        const note = await this.notesService.findOne(+id);
+        return note;
     }
 
     @Patch(':id')

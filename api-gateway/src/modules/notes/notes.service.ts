@@ -25,7 +25,12 @@ export class NotesService {
     }
 
     findOne(id: number) {
-        return `This action returns a #${id} note`;
+        this.appClient
+            .send('findOneNote', id)
+            .subscribe((note) => {
+                console.log(`note_fetched: ${note.id}`)
+                return note
+            })
     }
 
     update(id: number, updateNoteDto: UpdateNoteDto) {

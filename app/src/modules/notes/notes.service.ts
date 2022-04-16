@@ -16,28 +16,30 @@ export class NotesService {
     ) {
     }
 
-     create(createNoteDto: CreateNoteDto) {
-        let note = new Note();
+     async create(createNoteDto: CreateNoteDto) {
+         let note = new Note();
 
-        note.metadata = {
-            title: createNoteDto.title,
-            description: createNoteDto.description,
-            cover: createNoteDto.cover
-        } as NoteMetadata
+         note.metadata = {
+             title: createNoteDto.title,
+             description: createNoteDto.description,
+             cover: createNoteDto.cover
+         } as NoteMetadata
 
-        note.context = {
-            data: createNoteDto.content
-        } as NoteContext
+         note.context = {
+             data: createNoteDto.content
+         } as NoteContext
 
-        return note.save();
-    }
+         return await note.save();
+     }
 
     findAll() {
         return `This action returns all notes`;
     }
 
-    findOne(id: number) {
-        return `This action returns a #${id} note`;
+    async findOne(id: number) {
+        console.log(`This action returns a #${id} note`)
+        let note = await this.noteRepository.findOne<Note>({ where: { id } });
+        return note.get();
     }
 
     update(id: number, updateNoteDto: UpdateNoteDto) {
