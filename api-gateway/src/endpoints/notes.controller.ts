@@ -32,8 +32,11 @@ export class NotesController implements OnModuleInit{
 
     @Get(':id')
     async findOne(@Param('id') id: string){
-        let observable = this.appClient.send('findOneNote', id)
-        return await firstValueFrom(observable)
+        let data$ = this.appClient.send('findOneNote', id)
+        return await firstValueFrom(data$, {defaultValue: null})
+            .catch( e => {
+                console.log(e)}
+            )
     }
 
     @Patch(':id')
