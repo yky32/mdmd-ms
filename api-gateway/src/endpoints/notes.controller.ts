@@ -4,6 +4,7 @@ import {UpdateNoteDto} from '../modules/notes/dto/update-note.dto';
 import {ApiTags} from "@nestjs/swagger";
 import {CreateNoteRequest} from "../modules/notes/dto/request/create-note.request";
 import {ClientKafka} from "@nestjs/microservices";
+import {firstValueFrom} from "rxjs";
 
 @ApiTags("notes")
 @Controller('notes')
@@ -30,9 +31,9 @@ export class NotesController implements OnModuleInit{
     }
 
     @Get(':id')
-    async findOne(@Param('id') id: string) {
-        const note = await this.notesService.findOne(+id);
-        return note;
+    async findOne(@Param('id') id: string){
+        let observable = this.appClient.send('findOneNote', id)
+        return await firstValueFrom(observable)
     }
 
     @Patch(':id')

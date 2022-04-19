@@ -24,12 +24,11 @@ export class NotesService {
         return `This action returns all notes`;
     }
 
-    findOne(id: number) {
-        this.appClient
+    async findOne(id: number) {
+        return this.appClient
             .send('findOneNote', id)
-            .subscribe((note) => {
-                console.log(`note_fetched: ${note.id}`)
-                return note
+            .subscribe((n) => {
+
             })
     }
 

@@ -9,8 +9,7 @@ export class NotesController implements OnModuleInit {
     constructor(
         private readonly notesService: NotesService,
         @Inject("AUTH_SERVICE") private readonly authClient: ClientKafka,
-    ) {
-    }
+    ) {}
 
     onModuleInit() {
         this.authClient.subscribeToResponseOf('get_user');
@@ -34,7 +33,7 @@ export class NotesController implements OnModuleInit {
 
     @MessagePattern('findOneNote')
     findOne(data: any) {
-        console.log(`@MessagePattern('findOneNote') ${data}`)
+        console.log(`@MessagePattern('findOneNote') ${data.value}`)
         return this.notesService.findOne(data.value as number);
     }
 
@@ -45,6 +44,6 @@ export class NotesController implements OnModuleInit {
 
     @MessagePattern('removeNote')
     remove(@Payload() id: number) {
-        return this.notesService.remove(id);
+        return this.notesService.remove(id)
     }
 }
