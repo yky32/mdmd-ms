@@ -1,4 +1,4 @@
-import {HttpException, HttpStatus, Inject, Injectable, NotFoundException} from '@nestjs/common';
+import {Inject, Injectable, NotFoundException} from '@nestjs/common';
 import {CreateNoteDto} from './dto/create-note.dto';
 import {UpdateNoteDto} from './dto/update-note.dto';
 import {NOTE_REPOSITORY} from "../../core/constants";
@@ -16,7 +16,7 @@ export class NotesService {
     ) {
     }
 
-    async create(createNoteDto: CreateNoteDto) : Promise<Note>{
+    async create(createNoteDto: CreateNoteDto): Promise<Note> {
         let note = new Note();
 
         note.metadata = {
@@ -28,16 +28,18 @@ export class NotesService {
         note.context = {
             data: createNoteDto.content
         } as NoteContext
-        return await note.save()
+        await note.save()
+
+        return note.get()
     }
 
-    async findAll() : Promise<Note[]>{
+    async findAll(): Promise<Note[]> {
         return await this.noteRepository.findAll()
     }
 
-    async findOne(id: number) : Promise<Note>{
+    async findOne(id: number): Promise<Note> {
         console.log(`This action returns a #${id} note`)
-        let note = await this.noteRepository.findOne<Note>({where: {id}});
+        let note = await this.noteRepository.findOne<Note>({where: {id}})
         if (!note) { // if the post doesn't exit in the db, throw a 404 error
             throw new NotFoundException("the NOTE doesn't exit")
         }

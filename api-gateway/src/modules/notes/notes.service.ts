@@ -5,14 +5,10 @@ import {CreateNoteRequest} from "./dto/request/create-note.request";
 import {CreateNoteDto} from "./dto/create-note.dto";
 import {firstValueFrom, Observable} from "rxjs";
 
-async function awaitSubscribeResponse(data$: Observable<any>, afterEvent: string) {
-    await firstValueFrom(data$, {defaultValue: null})
-        .then(e => {
-            console.log(`${afterEvent} : ${e}`)
-        })
-        .catch(e => {
-            console.log(e)
-        });
+function getPromise(data$: Observable<any>) {
+    return firstValueFrom(data$, {defaultValue: null}).catch(e => {
+        console.log(e)
+    });
 }
 
 @Injectable()
@@ -31,17 +27,17 @@ export class NotesService implements OnModuleInit {
 
     async create({title, description, cover, content}: CreateNoteRequest) {
         let data$ = this.appClient.send('create-note', new CreateNoteDto(title, description, cover, content))
-        return await awaitSubscribeResponse(data$, 'note.created')
+        return await getPromise(data$)
     }
 
     async findAll() {
-        let data$ = this.appClient.send('findAll-notes', null)
-        return await awaitSubscribeResponse(data$, 'notes.all.fetched')
+        let data$ = this.appClient.send('findAll-notes', {})
+        return await getPromise(data$)
     }
 
     async findOne(id: number) {
         let data$ = this.appClient.send('findOne-note', id)
-        return await awaitSubscribeResponse(data$, 'note.one.fetched')
+        return await getPromise(data$)
     }
 
     update(id: number, updateNoteDto: UpdateNoteDto) {
