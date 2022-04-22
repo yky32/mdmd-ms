@@ -1,49 +1,53 @@
-import {Controller, Inject, OnModuleInit} from '@nestjs/common';
-import {ClientKafka, EventPattern, MessagePattern, Payload} from '@nestjs/microservices';
+import {Controller} from '@nestjs/common';
+import {EventPattern, MessagePattern, Payload} from '@nestjs/microservices';
 import {NotesService} from '../modules/notes/notes.service';
 import {CreateNoteDto} from '../modules/notes/dto/create-note.dto';
 import {UpdateNoteDto} from '../modules/notes/dto/update-note.dto';
+import {NOTE_CREATED} from "../core/constants/index.event";
+import {
+    CREATE_NOTE,
+    REMOVE_NOTE,
+    FIND_ALL_NOTES,
+    FIND_NOTE,
+    UPDATE_NOTE
+} from "../core/constants/index.message-pattern";
 
 @Controller()
-export class NotesController implements OnModuleInit {
+export class NotesController {
     constructor(
         private readonly notesService: NotesService,
-        @Inject("AUTH_SERVICE") private readonly authClient: ClientKafka,
-    ) {}
-
-    onModuleInit() {
-        this.authClient.subscribeToResponseOf('get_user');
+    ) {
     }
 
-    @EventPattern('note.created')
+    @EventPattern(NOTE_CREATED)
     handleOrderCreated(data: any) {
         this.notesService.handleNoteCreated(data.value);
     }
 
-    @MessagePattern('create-note')
+    @MessagePattern(CREATE_NOTE)
     create(data: any) {
-        console.log(`@MessagePattern('create-note') ${data.value}`)
+        console.log(`@MessagePattern('${CREATE_NOTE}') ${data.value}`)
         return this.notesService.create(data.value as CreateNoteDto);
     }
 
-    @MessagePattern('findAll-notes')
+    @MessagePattern(FIND_ALL_NOTES)
     findAll() {
-        console.log(`@MessagePattern('findAll-notes')`)
+        console.log(`@MessagePattern('${FIND_ALL_NOTES}')`)
         return this.notesService.findAll();
     }
 
-    @MessagePattern('findOne-note')
+    @MessagePattern(FIND_NOTE)
     findOne(data: any) {
-        console.log(`@MessagePattern('findOne-note') ${data.value}`)
+        console.log(`@MessagePattern('${FIND_NOTE}') ${data.value}`)
         return this.notesService.findOne(data.value as number);
     }
 
-    @MessagePattern('update-note')
+    @MessagePattern(UPDATE_NOTE)
     update(data: any) {
         return this.notesService.update(data.value.id as number, data.value as UpdateNoteDto);
     }
 
-    @MessagePattern('remove-note')
+    @MessagePattern(REMOVE_NOTE)
     remove(@Payload() id: number) {
         return this.notesService.remove(id)
     }
