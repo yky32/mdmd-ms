@@ -1,35 +1,47 @@
-import {Inject, Injectable} from '@nestjs/common';
+import {Inject, Injectable, OnModuleInit} from '@nestjs/common';
 import {UpdateNoteDto} from './dto/update-note.dto';
 import {ClientKafka} from "@nestjs/microservices";
 import {CreateNoteRequest} from "./dto/request/create-note.request";
 import {CreateNoteDto} from "./dto/create-note.dto";
+import {firstValueFrom, Observable} from "rxjs";
+
+async function awaitSubscribeResponse(data$: Observable<any>, afterEvent: string) {
+    await firstValueFrom(data$, {defaultValue: null})
+        .then(e => {
+            console.log(`${afterEvent} : ${e}`)
+        })
+        .catch(e => {
+            console.log(e)
+        });
+}
 
 @Injectable()
-export class NotesService {
+export class NotesService implements OnModuleInit {
 
     constructor(
         @Inject('APP_SERVICE') private readonly appClient: ClientKafka,
     ) {
     }
 
-    create({title, description, cover, content}: CreateNoteRequest) {
-        this.appClient
-            .send('createNote', new CreateNoteDto(title, description, cover, content))
-            .subscribe((note) => {
-                console.log(`note_created: ${note.id}`)
-            })
+    onModuleInit() {
+        this.appClient.subscribeToResponseOf('create-note');
+        this.appClient.subscribeToResponseOf('findOne-note');
+        this.appClient.subscribeToResponseOf('findAll-notes');
     }
 
-    findAll() {
-        return `This action returns all notes`;
+    async create({title, description, cover, content}: CreateNoteRequest) {
+        let data$ = this.appClient.send('create-note', new CreateNoteDto(title, description, cover, content))
+        return await awaitSubscribeResponse(data$, 'note.created')
+    }
+
+    async findAll() {
+        let data$ = this.appClient.send('findAll-notes', null)
+        return await awaitSubscribeResponse(data$, 'notes.all.fetched')
     }
 
     async findOne(id: number) {
-        return this.appClient
-            .send('findOneNote', id)
-            .subscribe((n) => {
-
-            })
+        let data$ = this.appClient.send('findOne-note', id)
+        return await awaitSubscribeResponse(data$, 'note.one.fetched')
     }
 
     update(id: number, updateNoteDto: UpdateNoteDto) {

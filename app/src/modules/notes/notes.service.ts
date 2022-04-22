@@ -16,7 +16,7 @@ export class NotesService {
     ) {
     }
 
-    async create(createNoteDto: CreateNoteDto) {
+    async create(createNoteDto: CreateNoteDto) : Promise<Note>{
         let note = new Note();
 
         note.metadata = {
@@ -28,22 +28,19 @@ export class NotesService {
         note.context = {
             data: createNoteDto.content
         } as NoteContext
-
-        return await note.save();
+        return await note.save()
     }
 
-    findAll() {
-        return `This action returns all notes`;
+    async findAll() : Promise<Note[]>{
+        return await this.noteRepository.findAll()
     }
 
-    async findOne(id: number) {
+    async findOne(id: number) : Promise<Note>{
         console.log(`This action returns a #${id} note`)
         let note = await this.noteRepository.findOne<Note>({where: {id}});
-
         if (!note) { // if the post doesn't exit in the db, throw a 404 error
             throw new NotFoundException("the NOTE doesn't exit")
         }
-
         return note.get()
     }
 

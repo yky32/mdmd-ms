@@ -4,20 +4,14 @@ import {UpdateNoteDto} from '../modules/notes/dto/update-note.dto';
 import {ApiTags} from "@nestjs/swagger";
 import {CreateNoteRequest} from "../modules/notes/dto/request/create-note.request";
 import {ClientKafka} from "@nestjs/microservices";
-import {firstValueFrom} from "rxjs";
 
 @ApiTags("notes")
 @Controller('notes')
-export class NotesController implements OnModuleInit{
+export class NotesController{
     constructor(
         private readonly notesService: NotesService,
         @Inject('APP_SERVICE') private readonly appClient: ClientKafka,
     ) {
-    }
-
-    onModuleInit() {
-        this.appClient.subscribeToResponseOf('createNote');
-        this.appClient.subscribeToResponseOf('findOneNote');
     }
 
     @Post()
@@ -31,12 +25,8 @@ export class NotesController implements OnModuleInit{
     }
 
     @Get(':id')
-    async findOne(@Param('id') id: string){
-        let data$ = this.appClient.send('findOneNote', id)
-        return await firstValueFrom(data$, {defaultValue: null})
-            .catch( e => {
-                console.log(e)}
-            )
+    async findOne(@Param('id') id: number) {
+        return this.notesService.findOne(id)
     }
 
     @Patch(':id')
