@@ -23,8 +23,7 @@ export class NotesController implements OnModuleInit {
     @MessagePattern('create-note')
     create(data: any) {
         console.log(`@MessagePattern('create-note') ${data.value}`)
-        let data$ = this.notesService.create(data.value as CreateNoteDto);
-        return data$;
+        return this.notesService.create(data.value as CreateNoteDto);
     }
 
     @MessagePattern('findAll-notes')
@@ -40,8 +39,8 @@ export class NotesController implements OnModuleInit {
     }
 
     @MessagePattern('update-note')
-    update(@Payload() updateNoteDto: UpdateNoteDto) {
-        return this.notesService.update(updateNoteDto.id, updateNoteDto);
+    update(data: any) {
+        return this.notesService.update(data.value.id as number, data.value as UpdateNoteDto);
     }
 
     @MessagePattern('remove-note')

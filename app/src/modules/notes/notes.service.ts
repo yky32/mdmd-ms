@@ -6,6 +6,7 @@ import {Note, NoteContext, NoteMetadata} from "./note.entity";
 import {NoteCreatedEvent} from "./dto/event/note-created.event";
 import {ClientKafka} from "@nestjs/microservices";
 import {GetUserRequest} from "./dto/get-user-request.dto";
+import {options} from "tsconfig-paths/lib/options";
 
 @Injectable()
 export class NotesService {
@@ -18,7 +19,6 @@ export class NotesService {
 
     async create(createNoteDto: CreateNoteDto): Promise<Note> {
         let note = new Note();
-
         note.metadata = {
             title: createNoteDto.title,
             description: createNoteDto.description,
@@ -29,7 +29,6 @@ export class NotesService {
             data: createNoteDto.content
         } as NoteContext
         await note.save()
-
         return note.get()
     }
 
@@ -46,8 +45,10 @@ export class NotesService {
         return note.get()
     }
 
-    update(id: number, updateNoteDto: UpdateNoteDto) {
-        return `This action updates a #${id} note`;
+    async update(id: number, updateNoteDto: UpdateNoteDto) {
+        console.log(`This action updates a #${id} note`)
+        let note = await this.noteRepository.update({...updateNoteDto}, {where: {id}});
+        return note
     }
 
     remove(id: number) {
