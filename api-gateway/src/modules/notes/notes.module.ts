@@ -2,20 +2,21 @@ import {Module} from '@nestjs/common';
 import {NotesService} from './notes.service';
 import {NotesController} from '../../endpoints/notes.controller';
 import {ClientsModule, Transport} from "@nestjs/microservices";
+import {APP_CLIENT_ID_KAFKA, APP_CONSUMER_KAFKA, APP_SERVICE_KAFKA} from "../../core/constants";
 
 @Module({
     imports: [
         ClientsModule.register([
             {
-                name: 'APP_SERVICE',
+                name: APP_SERVICE_KAFKA,
                 transport: Transport.KAFKA,
                 options: {
                     client: {
-                        clientId: 'app',
+                        clientId: APP_CLIENT_ID_KAFKA,
                         brokers: ['yky32.asuscomm.com:9092'],
                     },
                     consumer: {
-                        groupId: 'app-consumer',
+                        groupId: APP_CONSUMER_KAFKA,
                     },
                 },
             },
