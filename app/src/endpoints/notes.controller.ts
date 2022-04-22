@@ -6,9 +6,9 @@ import {UpdateNoteDto} from '../modules/notes/dto/update-note.dto';
 import {NOTE_CREATED} from "../core/constants/index.event";
 import {
     CREATE_NOTE,
-    REMOVE_NOTE,
     FIND_ALL_NOTES,
-    FIND_NOTE,
+    FIND_ONE_NOTE,
+    REMOVE_NOTE,
     UPDATE_NOTE
 } from "../core/constants/index.message-pattern";
 
@@ -36,9 +36,9 @@ export class NotesController {
         return this.notesService.findAll();
     }
 
-    @MessagePattern(FIND_NOTE)
+    @MessagePattern(FIND_ONE_NOTE)
     findOne(data: any) {
-        console.log(`@MessagePattern('${FIND_NOTE}') ${data.value}`)
+        console.log(`@MessagePattern('${FIND_ONE_NOTE}') ${data.value}`)
         return this.notesService.findOne(data.value as number);
     }
 

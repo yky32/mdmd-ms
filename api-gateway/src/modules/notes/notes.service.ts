@@ -4,6 +4,8 @@ import {ClientKafka} from "@nestjs/microservices";
 import {CreateNoteRequest} from "./dto/request/create-note.request";
 import {CreateNoteDto} from "./dto/create-note.dto";
 import {firstValueFrom, Observable} from "rxjs";
+import {CREATE_NOTE, FIND_ALL_NOTES, FIND_ONE_NOTE} from "../../core/constants/index.message-pattern";
+import {APP_SERVICE_KAFKA} from "../../core/constants";
 
 function getPromise(data$: Observable<any>) {
     return firstValueFrom(data$, {defaultValue: null}).catch(e => {
@@ -15,28 +17,28 @@ function getPromise(data$: Observable<any>) {
 export class NotesService implements OnModuleInit {
 
     constructor(
-        @Inject('APP_SERVICE') private readonly appClient: ClientKafka,
+        @Inject(APP_SERVICE_KAFKA) private readonly appClient: ClientKafka,
     ) {
     }
 
     onModuleInit() {
-        this.appClient.subscribeToResponseOf('create-note');
-        this.appClient.subscribeToResponseOf('findOne-note');
-        this.appClient.subscribeToResponseOf('findAll-notes');
+        this.appClient.subscribeToResponseOf(CREATE_NOTE);
+        this.appClient.subscribeToResponseOf(FIND_ONE_NOTE);
+        this.appClient.subscribeToResponseOf(FIND_ALL_NOTES);
     }
 
     async create({title, description, cover, content}: CreateNoteRequest) {
-        let data$ = this.appClient.send('create-note', new CreateNoteDto(title, description, cover, content))
+        let data$ = this.appClient.send(CREATE_NOTE, new CreateNoteDto(title, description, cover, content))
         return await getPromise(data$)
     }
 
     async findAll() {
-        let data$ = this.appClient.send('findAll-notes', {})
+        let data$ = this.appClient.send(FIND_ALL_NOTES, {})
         return await getPromise(data$)
     }
 
     async findOne(id: number) {
-        let data$ = this.appClient.send('findOne-note', id)
+        let data$ = this.appClient.send(FIND_ONE_NOTE, id)
         return await getPromise(data$)
     }
 
