@@ -5,3 +5,6 @@
 `https://github.com/onwuvic/nest-blog-api` <br>
 #### connection url <br>
 ``**mdmd/mdmd123!**``
+
+# Generate a new resource
+`nest g resource`
