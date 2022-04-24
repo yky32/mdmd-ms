@@ -2,7 +2,9 @@ import {Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common'
 import {TagsService} from '../modules/tags/tags.service';
 import {CreateTagDto} from '../modules/tags/dto/create-tag.dto';
 import {UpdateTagDto} from '../modules/tags/dto/update-tag.dto';
+import {ApiTags} from "@nestjs/swagger";
 
+@ApiTags("tags")
 @Controller('tags')
 export class TagsEndpoint {
     constructor(private readonly tagsService: TagsService) {
