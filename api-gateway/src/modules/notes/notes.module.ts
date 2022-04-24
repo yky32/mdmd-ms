@@ -2,7 +2,7 @@ import {Module} from '@nestjs/common';
 import {NotesService} from './notes.service';
 import {NotesController} from '../../endpoints/notes.controller';
 import {ClientsModule, Transport} from "@nestjs/microservices";
-import {APP_CLIENT_ID_KAFKA, APP_CONSUMER_KAFKA, APP_SERVICE_KAFKA} from "../../core/constants";
+import {APP_CLIENT_ID_KAFKA, APP_CONSUMER_KAFKA, APP_SERVICE_KAFKA} from "../../core/constants/index.app";
 
 @Module({
     imports: [

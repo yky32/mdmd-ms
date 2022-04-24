@@ -1,7 +1,7 @@
 import {NestFactory} from '@nestjs/core';
 import {AppModule} from './app.module';
 import {MicroserviceOptions, Transport} from "@nestjs/microservices";
-import {APP_CONSUMER_KAFKA} from "./core/constants";
+import {APP_CONSUMER_KAFKA} from "./core/constants/index.app";
 
 
 async function bootstrap() {

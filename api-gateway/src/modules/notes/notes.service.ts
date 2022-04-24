@@ -5,7 +5,7 @@ import {CreateNoteRequest} from "./dto/request/create-note.request";
 import {CreateNoteDto} from "./dto/create-note.dto";
 import {firstValueFrom, Observable} from "rxjs";
 import {CREATE_NOTE, FIND_ALL_NOTES, FIND_ONE_NOTE} from "../../core/constants/index.message-pattern";
-import {APP_SERVICE_KAFKA} from "../../core/constants";
+import {APP_SERVICE_KAFKA} from "../../core/constants/index.app";
 
 function getPromise(data$: Observable<any>) {
     return firstValueFrom(data$, {defaultValue: null}).catch(e => {

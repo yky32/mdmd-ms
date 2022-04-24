@@ -12,6 +12,9 @@ import {
 
 @Table({
     tableName: 'tags',
+    version: true,
+    timestamps: true,
+    underscored: true
 })
 export class Tag extends Model<Tag> {
     @PrimaryKey
@@ -22,12 +25,4 @@ export class Tag extends Model<Tag> {
     @Unique
     @Column({field: 'name'})
     name: string;
-
-    @CreatedAt
-    @Column({field: 'created_at'})
-    createdAt: Date;
-
-    @UpdatedAt
-    @Column({field: 'updated_at'})
-    updatedAt: Date;
 }

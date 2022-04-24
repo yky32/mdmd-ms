@@ -2,6 +2,9 @@ import {AutoIncrement, Column, CreatedAt, DataType, Model, PrimaryKey, Table, Up
 
 @Table({
     tableName: 'notes',
+    version: true,
+    timestamps: true,
+    underscored: true
 })
 export class Note extends Model<Note> {
     @PrimaryKey
@@ -20,14 +23,6 @@ export class Note extends Model<Note> {
         allowNull: false,
     })
     context: NoteContext;
-
-    @CreatedAt
-    @Column({field: 'created_at'})
-    createdAt: Date;
-
-    @UpdatedAt
-    @Column({field: 'updated_at'})
-    updatedAt: Date;
 }
 
 

@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv';
+import {SyncOptions} from "sequelize/types/sequelize";
 
 dotenv.config();
 
@@ -9,7 +10,7 @@ export interface IDatabaseConfigAttributes {
     host?: string;
     port?: number | string;
     dialect?: string;
-    urlDatabase?: string;
+    sync?: SyncOptions;
 }
 
 export interface IDatabaseConfig {
@@ -27,6 +28,9 @@ export const databaseConfig: IDatabaseConfig = {
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
         dialect: process.env.DB_DIALECT,
+        sync: {
+            alter: true
+        }
     },
     test: {
         username: process.env.DB_USER,
