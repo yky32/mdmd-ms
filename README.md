@@ -7,4 +7,7 @@
 ``**mdmd/mdmd123!**``
 
 # Generate a new resource
-`nest g resource`
+`nest g resource` <br>
+```
+https://docs.nestjs.com/providers
+```
