@@ -1,8 +1,8 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { FoldersService } from './folders.service';
-import { CreateFolderDto } from './dto/create-folder.dto';
-import { UpdateFolderDto } from './dto/update-folder.dto';
+import { FoldersService } from '../modules/folders/folders.service';
+import { CreateFolderDto } from '../modules/folders/dto/create-folder.dto';
+import { UpdateFolderDto } from '../modules/folders/dto/update-folder.dto';
 
 @Controller()
 export class FoldersController {

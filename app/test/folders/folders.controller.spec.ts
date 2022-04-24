@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FoldersController } from '../../src/modules/folders/folders.controller';
+import { FoldersController } from '../../src/endpoints/folders.controller';
 import { FoldersService } from '../../src/modules/folders/folders.service';
 
 describe('FoldersController', () => {

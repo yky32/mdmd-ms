@@ -6,7 +6,7 @@ import {CreateNoteRequest} from "../modules/notes/dto/request/create-note.reques
 
 @ApiTags("notes")
 @Controller('notes')
-export class NotesController {
+export class NotesEndpoint {
     constructor(
         private readonly notesService: NotesService,
     ) {}
