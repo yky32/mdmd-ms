@@ -1,6 +1,8 @@
 import {AutoIncrement, Column, CreatedAt, DataType, Model, PrimaryKey, Table, UpdatedAt} from 'sequelize-typescript';
 
-@Table
+@Table({
+    tableName: 'notes',
+})
 export class Note extends Model<Note> {
     @PrimaryKey
     @AutoIncrement
@@ -25,7 +27,6 @@ export class Note extends Model<Note> {
 
     @UpdatedAt
     @Column({field: 'updated_at'})
-
     updatedAt: Date;
 }
 

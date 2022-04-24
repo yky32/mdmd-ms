@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FoldersService } from './folders.service';
+import { FoldersService } from '../../src/modules/folders/folders.service';
 
 describe('FoldersService', () => {
   let service: FoldersService;

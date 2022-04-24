@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FoldersController } from './folders.controller';
-import { FoldersService } from './folders.service';
+import { FoldersController } from '../../src/modules/folders/folders.controller';
+import { FoldersService } from '../../src/modules/folders/folders.service';
 
 describe('FoldersController', () => {
   let controller: FoldersController;

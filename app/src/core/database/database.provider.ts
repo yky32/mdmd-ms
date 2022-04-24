@@ -3,6 +3,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { SEQUELIZE, DEVELOPMENT, TEST, PRODUCTION } from '../constants';
 import { databaseConfig } from './database.config';
 import { Note } from '../../modules/notes/note.entity';
+import {Tag} from "../../modules/tags/tag.entity";
 
 export const databaseProviders = [
     {
@@ -24,7 +25,7 @@ export const databaseProviders = [
             }
             const sequelize = new Sequelize(config);
             sequelize.addModels([
-                Note,
+                Note, Tag
             ]);
             await sequelize.sync();
             return sequelize;
