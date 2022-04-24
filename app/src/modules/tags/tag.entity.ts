@@ -1,14 +1,16 @@
 import {
     AutoIncrement,
+    BelongsToMany,
     Column,
-    CreatedAt,
     DataType,
+    ForeignKey,
     Model,
     PrimaryKey,
     Table,
-    Unique,
-    UpdatedAt
+    Unique
 } from "sequelize-typescript";
+import {Note} from "../notes/note.entity";
+import {NoteTag} from "../composite/note-tag.entity";
 
 @Table({
     tableName: 'tags',
@@ -25,4 +27,7 @@ export class Tag extends Model<Tag> {
     @Unique
     @Column({field: 'name'})
     name: string;
+
+    @BelongsToMany(() => Note, () => NoteTag)
+    notes: Note[];
 }

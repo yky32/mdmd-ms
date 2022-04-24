@@ -4,6 +4,7 @@ import { SEQUELIZE, DEVELOPMENT, QA, PRODUCTION } from '../constants/index.app';
 import { databaseConfig } from './database.config';
 import { Note } from '../../modules/notes/note.entity';
 import {Tag} from "../../modules/tags/tag.entity";
+import {NoteTag} from "../../modules/composite/note-tag.entity";
 
 export const databaseProviders = [
     {
@@ -27,6 +28,7 @@ export const databaseProviders = [
             sequelize.addModels([
                 Note,
                 Tag,
+                NoteTag,
             ]);
             await sequelize.sync();
             return sequelize;

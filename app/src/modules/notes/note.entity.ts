@@ -1,4 +1,15 @@
-import {AutoIncrement, Column, CreatedAt, DataType, Model, PrimaryKey, Table, UpdatedAt} from 'sequelize-typescript';
+import {
+    AutoIncrement,
+    BelongsToMany,
+    Column,
+    DataType,
+    ForeignKey,
+    Model,
+    PrimaryKey,
+    Table
+} from 'sequelize-typescript';
+import {Tag} from "../tags/tag.entity";
+import {NoteTag} from "../composite/note-tag.entity";
 
 @Table({
     tableName: 'notes',
@@ -23,6 +34,9 @@ export class Note extends Model<Note> {
         allowNull: false,
     })
     context: NoteContext;
+
+    @BelongsToMany(() => Tag, () => NoteTag)
+    tags: Tag[]
 }
 
 
