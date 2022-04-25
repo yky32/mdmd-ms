@@ -6,6 +6,7 @@ export const PRODUCTION = 'prod';
 // Repository
 export const NOTE_REPOSITORY = 'NOTE_REPOSITORY';
 export const TAG_REPOSITORY = 'TAG_REPOSITORY';
+export const NOTE_TAG_REPOSITORY = 'NOTE_TAG_REPOSITORY';
 
 export const BROKER_ADDRESS_KAFKA = 'yky32.asuscomm.com:9092';
 

@@ -11,7 +11,7 @@ export class NotesEventPattern {
     }
 
     @EventPattern(NOTE_CREATED)
-    handleOrderCreated(data: any) {
-        this.notesProcessor.orderCreated(data.value)
+    async handleOrderCreated(data: any) {
+        await this.notesProcessor.orderCreated(data.value)
     }
 }

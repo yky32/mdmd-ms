@@ -1,11 +1,14 @@
 import {Injectable} from '@nestjs/common';
+import {NotesService} from "./notes.service";
 
 @Injectable()
 export class NotesProcessor {
-    constructor() {
+    constructor(
+        private readonly notesService: NotesService,
+    ) {
     }
 
-    orderCreated(data: any) {
-        console.log(data)
+    async orderCreated(data: any) {
+        await this.notesService.orderCreated(data);
     }
 }

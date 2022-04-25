@@ -1,7 +1,7 @@
 import {Module} from '@nestjs/common';
 import {NotesService} from './notes.service';
 import {NotesMessagePattern} from '../../endpoints/notes.message-pattern';
-import {notessProviders} from "./notes.providers";
+import {notesProviders} from "./notes.providers";
 import {ClientsModule, Transport} from "@nestjs/microservices";
 import {
     APP_CLIENT_ID_KAFKA,
@@ -57,7 +57,7 @@ import {NotesProcessor} from "./notes.processor";
         NotesService,
         NotesUseCase,
         NotesProcessor,
-        ...notessProviders
+        ...notesProviders
     ],
     exports: [NotesService]
 })

@@ -4,6 +4,7 @@ import {NOTE_CREATED} from "../../core/constants/app.event";
 import {APP_SERVICE_KAFKA} from "../../core/constants/app.app";
 import {ClientKafka} from "@nestjs/microservices";
 import {CreateNoteDto} from "./dto/create-note.dto";
+import {Note} from "./note.entity";
 
 @Injectable()
 export class NotesUseCase {
@@ -18,7 +19,7 @@ export class NotesUseCase {
         if (value.tagIds && note) {
             this.appClient.emit(NOTE_CREATED, {
                 tagIds: value.tagIds,
-                note: note
+                note: note as Note
             })
         }
         return note
