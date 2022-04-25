@@ -3,10 +3,10 @@ import {CreateNoteDto} from './dto/create-note.dto';
 import {UpdateNoteDto} from './dto/update-note.dto';
 import {AUTH_SERVICE_KAFKA, NOTE_REPOSITORY} from "../../core/constants/index.app";
 import {Note, NoteContext, NoteMetadata} from "./note.entity";
-import {NoteCreatedEvent} from "./dto/event/note-created.event";
 import {ClientKafka} from "@nestjs/microservices";
-import {GetUserRequest} from "./dto/request/get-user-request.dto";
 import {TagsService} from "../tags/tags.service";
+import {APP_SERVICE_KAFKA} from "../../../../api-gateway/src/core/constants/index.app";
+import {NOTE_CREATED} from "../../core/constants/index.event";
 
 @Injectable()
 export class NotesService {
@@ -14,6 +14,7 @@ export class NotesService {
         private readonly tagsService: TagsService,
         @Inject(NOTE_REPOSITORY) private readonly noteRepository: typeof Note,
         @Inject(AUTH_SERVICE_KAFKA) private readonly authClient: ClientKafka,
+        @Inject(APP_SERVICE_KAFKA) private readonly appClient: ClientKafka,
     ) {
     }
 
@@ -29,6 +30,13 @@ export class NotesService {
             data: createNoteDto.content
         } as NoteContext
 
+        if (createNoteDto.tagIds) {
+            this.appClient.emit(NOTE_CREATED,
+                {
+                    tagIds: createNoteDto.tagIds,
+                    note: note
+                })
+        }
         await note.save()
         return note.get()
     }
@@ -56,13 +64,7 @@ export class NotesService {
         return `This action removes a #${id} note`;
     }
 
-    handleNoteCreated(noteCreatedEvent: NoteCreatedEvent) {
-        console.log(noteCreatedEvent)
-        let userId = noteCreatedEvent.userId;
-        this.authClient
-            .send('get_user', new GetUserRequest(userId))
-            .subscribe((user) => {
-                console.log(`Billing user with ${user.stripeUserId} a price of ${noteCreatedEvent.price}`)
-            })
+    handleNoteCreated(data: any) {
+        console.log(data)
     }
 }

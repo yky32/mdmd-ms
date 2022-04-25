@@ -3,10 +3,9 @@ import {CreateTagDto} from './dto/create-tag.dto';
 import {UpdateTagDto} from './dto/update-tag.dto';
 import {APP_SERVICE_KAFKA} from "../../core/constants/index.app";
 import {ClientKafka} from "@nestjs/microservices";
-import {CREATE_TAG, FIND_ALL_TAGS, FIND_ONE_TAG} from "../../../../app/dist/core/constants/index.message-pattern";
 import {CreateTagRequestDto} from "./dto/request/create-tag.request.dto";
 import {getPromise} from "../../core/util";
-import {FIND_ALL_NOTES, FIND_ONE_NOTE} from "../../core/constants/index.message-pattern";
+import {CREATE_TAG, FIND_ALL_TAGS, FIND_ONE_TAG} from "../../../../app/src/core/constants/index.message-pattern";
 
 @Injectable()
 export class TagsService implements OnModuleInit {
