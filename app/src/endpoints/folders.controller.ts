@@ -9,7 +9,7 @@ import {
     FIND_ONE_FOLDER,
     REMOVE_FOLDER,
     UPDATE_FOLDER
-} from "../core/constants/index.message-pattern";
+} from "../core/constants/app.message-pattern";
 
 @Controller()
 export class FoldersController {

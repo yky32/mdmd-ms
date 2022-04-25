@@ -7,7 +7,7 @@ import {
     APP_CONSUMER_KAFKA,
     APP_SERVICE_KAFKA,
     BROKER_ADDRESS_KAFKA
-} from "../../core/constants/index.app";
+} from "../../core/constants/api-gw.app";
 
 @Module({
     imports: [

@@ -2,7 +2,7 @@ import {Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common'
 import {TagsService} from '../modules/tags/tags.service';
 import {UpdateTagDto} from '../modules/tags/dto/update-tag.dto';
 import {ApiTags} from "@nestjs/swagger";
-import {API_PREFIX, API_V1} from "../core/constants/index.app";
+import {API_PREFIX, API_V1} from "../core/constants/api-gw.app";
 import {CreateTagRequestDto} from "../modules/tags/dto/request/create-tag.request.dto";
 
 let domain = 'tags';

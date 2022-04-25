@@ -3,7 +3,7 @@ import {FoldersService} from '../modules/folders/folders.service';
 import {CreateFolderDto} from '../modules/folders/dto/create-folder.dto';
 import {UpdateFolderDto} from '../modules/folders/dto/update-folder.dto';
 import {ApiTags} from "@nestjs/swagger";
-import {API_PREFIX, API_V1} from "../core/constants/index.app";
+import {API_PREFIX, API_V1} from "../core/constants/api-gw.app";
 
 
 let domain = 'folders';

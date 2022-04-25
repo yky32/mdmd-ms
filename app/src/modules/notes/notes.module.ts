@@ -9,7 +9,7 @@ import {
     AUTH_CLIENT_ID_KAFKA,
     AUTH_CONSUMER_KAFKA,
     AUTH_SERVICE_KAFKA, BROKER_ADDRESS_KAFKA
-} from "../../core/constants/index.app";
+} from "../../core/constants/app.app";
 import {TagsModule} from "../tags/tags.module";
 
 @Module({

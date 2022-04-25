@@ -3,14 +3,14 @@ import {EventPattern, MessagePattern, Payload} from '@nestjs/microservices';
 import {NotesService} from '../modules/notes/notes.service';
 import {CreateNoteDto} from '../modules/notes/dto/create-note.dto';
 import {UpdateNoteDto} from '../modules/notes/dto/update-note.dto';
-import {NOTE_CREATED} from "../core/constants/index.event";
+import {NOTE_CREATED} from "../core/constants/app.event";
 import {
     CREATE_NOTE,
     FIND_ALL_NOTES,
     FIND_ONE_NOTE,
     REMOVE_NOTE,
     UPDATE_NOTE
-} from "../core/constants/index.message-pattern";
+} from "../core/constants/app.message-pattern";
 
 @Controller()
 export class NotesController {

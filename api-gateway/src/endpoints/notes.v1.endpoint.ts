@@ -3,7 +3,7 @@ import {NotesService} from '../modules/notes/notes.service';
 import {UpdateNoteDto} from '../modules/notes/dto/update-note.dto';
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {CreateNoteRequestDto} from "../modules/notes/dto/request/create-note.request.dto";
-import {API_PREFIX, API_V1} from "../core/constants/index.app";
+import {API_PREFIX, API_V1} from "../core/constants/api-gw.app";
 
 let domain = 'notes';
 const prefix = API_PREFIX + API_V1 + domain;

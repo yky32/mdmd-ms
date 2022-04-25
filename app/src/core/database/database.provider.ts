@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 
-import { SEQUELIZE, DEVELOPMENT, QA, PRODUCTION } from '../constants/index.app';
+import { SEQUELIZE, DEVELOPMENT, QA, PRODUCTION } from '../constants/app.app';
 import { databaseConfig } from './database.config';
 import { Note } from '../../modules/notes/note.entity';
 import {Tag} from "../../modules/tags/tag.entity";

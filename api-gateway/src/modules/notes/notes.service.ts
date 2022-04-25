@@ -4,8 +4,8 @@ import {ClientKafka} from "@nestjs/microservices";
 import {CreateNoteRequestDto} from "./dto/request/create-note.request.dto";
 import {CreateNoteDto} from "./dto/create-note.dto";
 import {firstValueFrom, Observable} from "rxjs";
-import {CREATE_NOTE, FIND_ALL_NOTES, FIND_ONE_NOTE} from "../../core/constants/index.message-pattern";
-import {APP_SERVICE_KAFKA} from "../../core/constants/index.app";
+import {CREATE_NOTE, FIND_ALL_NOTES, FIND_ONE_NOTE} from "../../core/constants/api-gw.message-pattern";
+import {APP_SERVICE_KAFKA} from "../../core/constants/api-gw.app";
 import {getPromise} from "../../core/util";
 
 

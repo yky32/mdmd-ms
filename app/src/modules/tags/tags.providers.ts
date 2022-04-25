@@ -1,4 +1,4 @@
-import {TAG_REPOSITORY} from "../../core/constants/index.app";
+import {TAG_REPOSITORY} from "../../core/constants/app.app";
 import {Tag} from "./tag.entity";
 
 export const tagsProviders = [

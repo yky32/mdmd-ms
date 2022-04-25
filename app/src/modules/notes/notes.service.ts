@@ -1,12 +1,11 @@
 import {Inject, Injectable, NotFoundException} from '@nestjs/common';
 import {CreateNoteDto} from './dto/create-note.dto';
 import {UpdateNoteDto} from './dto/update-note.dto';
-import {AUTH_SERVICE_KAFKA, NOTE_REPOSITORY} from "../../core/constants/index.app";
+import {APP_SERVICE_KAFKA, AUTH_SERVICE_KAFKA, NOTE_REPOSITORY} from "../../core/constants/app.app";
 import {Note, NoteContext, NoteMetadata} from "./note.entity";
 import {ClientKafka} from "@nestjs/microservices";
 import {TagsService} from "../tags/tags.service";
-import {APP_SERVICE_KAFKA} from "../../../../api-gateway/src/core/constants/index.app";
-import {NOTE_CREATED} from "../../core/constants/index.event";
+import {NOTE_CREATED} from "../../core/constants/app.event";
 
 @Injectable()
 export class NotesService {
