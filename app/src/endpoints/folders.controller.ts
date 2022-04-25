@@ -1,35 +1,43 @@
-import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
-import { FoldersService } from '../modules/folders/folders.service';
-import { CreateFolderDto } from '../modules/folders/dto/create-folder.dto';
-import { UpdateFolderDto } from '../modules/folders/dto/update-folder.dto';
+import {Controller} from '@nestjs/common';
+import {MessagePattern, Payload} from '@nestjs/microservices';
+import {FoldersService} from '../modules/folders/folders.service';
+import {CreateFolderDto} from '../modules/folders/dto/create-folder.dto';
+import {UpdateFolderDto} from '../modules/folders/dto/update-folder.dto';
+import {
+    CREATE_FOLDER,
+    FIND_ALL_FOLDERS,
+    FIND_ONE_FOLDER,
+    REMOVE_FOLDER,
+    UPDATE_FOLDER
+} from "../core/constants/index.message-pattern";
 
 @Controller()
 export class FoldersController {
-  constructor(private readonly foldersService: FoldersService) {}
+    constructor(private readonly foldersService: FoldersService) {
+    }
 
-  @MessagePattern('createFolder')
-  create(@Payload() createFolderDto: CreateFolderDto) {
-    return this.foldersService.create(createFolderDto);
-  }
+    @MessagePattern(CREATE_FOLDER)
+    create(@Payload() createFolderDto: CreateFolderDto) {
+        return this.foldersService.create(createFolderDto);
+    }
 
-  @MessagePattern('findAllFolders')
-  findAll() {
-    return this.foldersService.findAll();
-  }
+    @MessagePattern(FIND_ALL_FOLDERS)
+    findAll() {
+        return this.foldersService.findAll();
+    }
 
-  @MessagePattern('findOneFolder')
-  findOne(@Payload() id: number) {
-    return this.foldersService.findOne(id);
-  }
+    @MessagePattern(FIND_ONE_FOLDER)
+    findOne(@Payload() id: number) {
+        return this.foldersService.findOne(id);
+    }
 
-  @MessagePattern('updateFolder')
-  update(@Payload() updateFolderDto: UpdateFolderDto) {
-    return this.foldersService.update(updateFolderDto.id, updateFolderDto);
-  }
+    @MessagePattern(UPDATE_FOLDER)
+    update(@Payload() updateFolderDto: UpdateFolderDto) {
+        return this.foldersService.update(updateFolderDto.id, updateFolderDto);
+    }
 
-  @MessagePattern('removeFolder')
-  remove(@Payload() id: number) {
-    return this.foldersService.remove(id);
-  }
+    @MessagePattern(REMOVE_FOLDER)
+    remove(@Payload() id: number) {
+        return this.foldersService.remove(id);
+    }
 }

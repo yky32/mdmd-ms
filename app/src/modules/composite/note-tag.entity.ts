@@ -1,14 +1,4 @@
-import {
-    AutoIncrement,
-    BelongsToMany,
-    Column,
-    DataType,
-    ForeignKey,
-    Model,
-    PrimaryKey,
-    Table,
-    Unique
-} from "sequelize-typescript";
+import {Column, ForeignKey, Model, Table} from "sequelize-typescript";
 import {Note} from "../notes/note.entity";
 import {Tag} from "../tags/tag.entity";
 
