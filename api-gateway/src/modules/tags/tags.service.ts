@@ -3,33 +3,35 @@ import {CreateTagDto} from './dto/create-tag.dto';
 import {UpdateTagDto} from './dto/update-tag.dto';
 import {APP_SERVICE_KAFKA} from "../../core/constants/index.app";
 import {ClientKafka} from "@nestjs/microservices";
-import {CREATE_TAG} from "../../../../app/dist/core/constants/index.message-pattern";
+import {CREATE_TAG, FIND_ALL_TAGS, FIND_ONE_TAG} from "../../../../app/dist/core/constants/index.message-pattern";
 import {CreateTagRequestDto} from "./dto/request/create-tag.request.dto";
 import {getPromise} from "../../common/util";
+import {FIND_ALL_NOTES, FIND_ONE_NOTE} from "../../core/constants/index.message-pattern";
 
 @Injectable()
 export class TagsService implements OnModuleInit {
 
     constructor(
         @Inject(APP_SERVICE_KAFKA) private readonly appClient: ClientKafka,
-    ) {
-    }
+    ) {}
 
     onModuleInit(): any {
         this.appClient.subscribeToResponseOf(CREATE_TAG);
     }
 
     async create({name}: CreateTagRequestDto) {
-      let data$ = this.appClient.send(CREATE_TAG, new CreateTagDto(name))
-      return await getPromise(data$)
+        let data$ = this.appClient.send(CREATE_TAG, new CreateTagDto(name))
+        return await getPromise(data$)
     }
 
-    findAll() {
-        return `This action returns all tags`;
+    async findAll() {
+        let data$ = this.appClient.send(FIND_ALL_TAGS, {})
+        return await getPromise(data$)
     }
 
-    findOne(id: number) {
-        return `This action returns a #${id} tag`;
+    async findOne(id: number) {
+        let data$ = this.appClient.send(FIND_ONE_TAG, id)
+        return await getPromise(data$)
     }
 
     update(id: number, updateTagDto: UpdateTagDto) {

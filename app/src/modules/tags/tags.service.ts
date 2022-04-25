@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@nestjs/common';
+import {Inject, Injectable, NotFoundException} from '@nestjs/common';
 import {CreateTagDto} from './dto/create-tag.dto';
 import {UpdateTagDto} from './dto/update-tag.dto';
 import {TAG_REPOSITORY} from "../../core/constants/index.app";
@@ -12,22 +12,26 @@ export class TagsService {
     ) {
     }
 
-    async create(createTagDto: CreateTagDto) {
+    async create(createTagDto: CreateTagDto): Promise<Tag> {
         let tag = new Tag()
         tag.name = createTagDto.name
         await tag.save()
         return tag.get();
     }
 
-    findAll() {
-        return `This action returns all tags`;
+    async findAll(): Promise<Tag[]> {
+        return await this.tagRepository.findAll()
     }
 
-    findOne(id: number) {
-        return `This action returns a #${id} tag`;
+    async findOne(id: number): Promise<Tag> {
+        let tag = await this.tagRepository.findOne<Tag>({where: {id}})
+        if (!tag) {
+            throw new NotFoundException("the Tag doesn't exit")
+        }
+        return tag.get()
     }
 
-    update(id: number, updateTagDto: UpdateTagDto) {
+    async update(id: number, updateTagDto: UpdateTagDto) {
         return `This action updates a #${id} tag`;
     }
 
