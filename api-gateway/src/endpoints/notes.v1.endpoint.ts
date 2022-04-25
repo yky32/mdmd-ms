@@ -5,9 +5,10 @@ import {ApiTags} from "@nestjs/swagger";
 import {CreateNoteRequest} from "../modules/notes/dto/request/create-note.request";
 import {API_PREFIX, API_V1} from "../core/constants/index.app";
 
-const prefix = API_PREFIX + API_V1 + 'notes';
+let domain = 'notes';
+const prefix = API_PREFIX + API_V1 + domain;
 
-@ApiTags(prefix)
+@ApiTags(domain)
 @Controller(prefix)
 export class NotesV1Endpoint {
     constructor(

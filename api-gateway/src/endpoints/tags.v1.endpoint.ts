@@ -5,9 +5,10 @@ import {UpdateTagDto} from '../modules/tags/dto/update-tag.dto';
 import {ApiTags} from "@nestjs/swagger";
 import {API_PREFIX, API_V1} from "../core/constants/index.app";
 
-const prefix = API_PREFIX + API_V1 + 'tags';
+let domain = 'tags';
+const prefix = API_PREFIX + API_V1 + domain;
 
-@ApiTags(prefix)
+@ApiTags(domain)
 @Controller(prefix)
 export class TagsV1Endpoint {
     constructor(private readonly tagsService: TagsService) {

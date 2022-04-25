@@ -5,9 +5,11 @@ import {UpdateFolderDto} from '../modules/folders/dto/update-folder.dto';
 import {ApiTags} from "@nestjs/swagger";
 import {API_PREFIX, API_V1} from "../core/constants/index.app";
 
-const prefix = API_PREFIX + API_V1 + 'folders';
 
-@ApiTags(prefix)
+let domain = 'folders';
+const prefix = API_PREFIX + API_V1 + domain;
+
+@ApiTags(domain)
 @Controller(prefix)
 export class FoldersV1Endpoints {
     constructor(private readonly foldersService: FoldersService) {
