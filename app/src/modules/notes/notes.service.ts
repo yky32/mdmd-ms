@@ -5,12 +5,13 @@ import {AUTH_SERVICE_KAFKA, NOTE_REPOSITORY} from "../../core/constants/index.ap
 import {Note, NoteContext, NoteMetadata} from "./note.entity";
 import {NoteCreatedEvent} from "./dto/event/note-created.event";
 import {ClientKafka} from "@nestjs/microservices";
-import {GetUserRequest} from "./dto/get-user-request.dto";
+import {GetUserRequest} from "./dto/request/get-user-request.dto";
+import {TagsService} from "../tags/tags.service";
 
 @Injectable()
 export class NotesService {
-
     constructor(
+        private readonly tagsService: TagsService,
         @Inject(NOTE_REPOSITORY) private readonly noteRepository: typeof Note,
         @Inject(AUTH_SERVICE_KAFKA) private readonly authClient: ClientKafka,
     ) {
@@ -27,6 +28,7 @@ export class NotesService {
         note.context = {
             data: createNoteDto.content
         } as NoteContext
+
         await note.save()
         return note.get()
     }
@@ -45,9 +47,9 @@ export class NotesService {
     }
 
     async update(id: number, updateNoteDto: UpdateNoteDto) {
-        console.log(`This action updates a #${id} note`)
-        let note = await this.noteRepository.update({...updateNoteDto}, {where: {id}});
-        return note
+        // console.log(`This action updates a #${id} note`)
+        // let note = await this.noteRepository.update({...updateNoteDto}, {where: {id}});
+        // return note
     }
 
     remove(id: number) {

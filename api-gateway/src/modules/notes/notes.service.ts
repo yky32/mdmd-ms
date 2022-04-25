@@ -6,7 +6,7 @@ import {CreateNoteDto} from "./dto/create-note.dto";
 import {firstValueFrom, Observable} from "rxjs";
 import {CREATE_NOTE, FIND_ALL_NOTES, FIND_ONE_NOTE} from "../../core/constants/index.message-pattern";
 import {APP_SERVICE_KAFKA} from "../../core/constants/index.app";
-import {getPromise} from "../../common/util";
+import {getPromise} from "../../core/util";
 
 
 
@@ -24,8 +24,8 @@ export class NotesService implements OnModuleInit {
         this.appClient.subscribeToResponseOf(FIND_ALL_NOTES);
     }
 
-    async create({title, description, cover, content}: CreateNoteRequestDto) {
-        let data$ = this.appClient.send(CREATE_NOTE, new CreateNoteDto(title, description, cover, content))
+    async create({title, description, cover, content, tagIds}: CreateNoteRequestDto) {
+        let data$ = this.appClient.send(CREATE_NOTE, new CreateNoteDto(title, description, cover, content, tagIds))
         return await getPromise(data$)
     }
 
