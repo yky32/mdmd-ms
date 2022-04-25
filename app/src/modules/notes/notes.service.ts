@@ -38,9 +38,7 @@ export class NotesService {
 
     async findOne(id: number): Promise<Note> {
         console.log(`This action returns a #${id} note`)
-        let note = await this.noteRepository.findOne<Note>({
-            where: {id}
-        })
+        let note = await this.noteRepository.findByPk(id)
         if (!note) { // if the post doesn't exit in the db, throw a 404 error
             throw new NotFoundException("the NOTE doesn't exit")
         }
