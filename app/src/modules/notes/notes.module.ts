@@ -1,6 +1,6 @@
 import {Module} from '@nestjs/common';
 import {NotesService} from './notes.service';
-import {NotesController} from '../../endpoints/notes.controller';
+import {NotesMessagePattern} from '../../endpoints/notes.message-pattern';
 import {notessProviders} from "./notes.providers";
 import {ClientsModule, Transport} from "@nestjs/microservices";
 import {
@@ -11,6 +11,9 @@ import {
     AUTH_SERVICE_KAFKA, BROKER_ADDRESS_KAFKA
 } from "../../core/constants/app.app";
 import {TagsModule} from "../tags/tags.module";
+import {NotesUseCase} from "./notes.usecases";
+import {NotesEventPattern} from "../../endpoints/notes.event-pattern";
+import {NotesProcessor} from "./notes.processor";
 
 @Module({
     imports: [
@@ -46,8 +49,17 @@ import {TagsModule} from "../tags/tags.module";
         ]),
         TagsModule
     ],
-    controllers: [NotesController],
-    providers: [NotesService, ...notessProviders]
+    controllers: [
+        NotesMessagePattern,
+        NotesEventPattern,
+    ],
+    providers: [
+        NotesService,
+        NotesUseCase,
+        NotesProcessor,
+        ...notessProviders
+    ],
+    exports: [NotesService]
 })
 export class NotesModule {
 }

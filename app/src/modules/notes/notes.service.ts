@@ -1,41 +1,30 @@
 import {Inject, Injectable, NotFoundException} from '@nestjs/common';
 import {CreateNoteDto} from './dto/create-note.dto';
 import {UpdateNoteDto} from './dto/update-note.dto';
-import {APP_SERVICE_KAFKA, AUTH_SERVICE_KAFKA, NOTE_REPOSITORY} from "../../core/constants/app.app";
+import {AUTH_SERVICE_KAFKA, NOTE_REPOSITORY} from "../../core/constants/app.app";
 import {Note, NoteContext, NoteMetadata} from "./note.entity";
 import {ClientKafka} from "@nestjs/microservices";
-import {TagsService} from "../tags/tags.service";
-import {NOTE_CREATED} from "../../core/constants/app.event";
 
 @Injectable()
 export class NotesService {
     constructor(
-        private readonly tagsService: TagsService,
         @Inject(NOTE_REPOSITORY) private readonly noteRepository: typeof Note,
         @Inject(AUTH_SERVICE_KAFKA) private readonly authClient: ClientKafka,
-        @Inject(APP_SERVICE_KAFKA) private readonly appClient: ClientKafka,
     ) {
     }
 
-    async create(createNoteDto: CreateNoteDto): Promise<Note> {
+    async create(value: CreateNoteDto): Promise<Note> {
         let note = new Note();
         note.metadata = {
-            title: createNoteDto.title,
-            description: createNoteDto.description,
-            cover: createNoteDto.cover
+            title: value.title,
+            description: value.description,
+            cover: value.cover
         } as NoteMetadata
 
         note.context = {
-            data: createNoteDto.content
+            data: value.content
         } as NoteContext
 
-        if (createNoteDto.tagIds) {
-            this.appClient.emit(NOTE_CREATED,
-                {
-                    tagIds: createNoteDto.tagIds,
-                    note: note
-                })
-        }
         await note.save()
         return note.get()
     }
@@ -61,9 +50,5 @@ export class NotesService {
 
     remove(id: number) {
         return `This action removes a #${id} note`;
-    }
-
-    handleNoteCreated(data: any) {
-        console.log(data)
     }
 }

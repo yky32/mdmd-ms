@@ -1,9 +1,8 @@
 import {Controller} from '@nestjs/common';
-import {EventPattern, MessagePattern, Payload} from '@nestjs/microservices';
+import {MessagePattern, Payload} from '@nestjs/microservices';
 import {NotesService} from '../modules/notes/notes.service';
 import {CreateNoteDto} from '../modules/notes/dto/create-note.dto';
 import {UpdateNoteDto} from '../modules/notes/dto/update-note.dto';
-import {NOTE_CREATED} from "../core/constants/app.event";
 import {
     CREATE_NOTE,
     FIND_ALL_NOTES,
@@ -11,23 +10,21 @@ import {
     REMOVE_NOTE,
     UPDATE_NOTE
 } from "../core/constants/app.message-pattern";
+import {NotesUseCase} from "../modules/notes/notes.usecases";
 
 @Controller()
-export class NotesController {
+export class NotesMessagePattern {
     constructor(
         private readonly notesService: NotesService,
+        private readonly notesUseCase: NotesUseCase,
     ) {
     }
 
-    @EventPattern(NOTE_CREATED)
-    handleOrderCreated(data: any) {
-        this.notesService.handleNoteCreated(data.value);
-    }
 
     @MessagePattern(CREATE_NOTE)
     create(data: any) {
         console.log(`@MessagePattern('${CREATE_NOTE}') ${data.value}`)
-        return this.notesService.create(data.value as CreateNoteDto);
+        return this.notesUseCase.create(data.value as CreateNoteDto);
     }
 
     @MessagePattern(FIND_ALL_NOTES)

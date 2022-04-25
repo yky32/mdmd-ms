@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { NotesV1Endpoint } from '../../src/endpoints/notes.v1.endpoint';
 import { NotesService } from '../../src/modules/notes/notes.service';
 
-describe('NotesController', () => {
+describe('NotesMessagePattern', () => {
   let controller: NotesV1Endpoint;
 
   beforeEach(async () => {
