@@ -3,10 +3,13 @@ import {NotesService} from '../modules/notes/notes.service';
 import {UpdateNoteDto} from '../modules/notes/dto/update-note.dto';
 import {ApiTags} from "@nestjs/swagger";
 import {CreateNoteRequest} from "../modules/notes/dto/request/create-note.request";
+import {API_PREFIX, API_V1} from "../core/constants/index.app";
 
-@ApiTags("notes")
-@Controller('notes')
-export class NotesEndpoint {
+const prefix = API_PREFIX + API_V1 + 'notes';
+
+@ApiTags(prefix)
+@Controller(prefix)
+export class NotesV1Endpoint {
     constructor(
         private readonly notesService: NotesService,
     ) {}

@@ -1,17 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TagsEndpoint } from '../../src/endpoints/tags.endpoint';
+import { TagsV1Endpoint } from '../../src/endpoints/tags.v1.endpoint';
 import { TagsService } from '../../src/modules/tags/tags.service';
 
 describe('TagsController', () => {
-  let controller: TagsEndpoint;
+  let controller: TagsV1Endpoint;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [TagsEndpoint],
+      controllers: [TagsV1Endpoint],
       providers: [TagsService],
     }).compile();
 
-    controller = module.get<TagsEndpoint>(TagsEndpoint);
+    controller = module.get<TagsV1Endpoint>(TagsV1Endpoint);
   });
 
   it('should be defined', () => {

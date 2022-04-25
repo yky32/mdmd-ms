@@ -1,17 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { NotesEndpoint } from '../../src/endpoints/notes.endpoint';
+import { NotesV1Endpoint } from '../../src/endpoints/notes.v1.endpoint';
 import { NotesService } from '../../src/modules/notes/notes.service';
 
 describe('NotesController', () => {
-  let controller: NotesEndpoint;
+  let controller: NotesV1Endpoint;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [NotesEndpoint],
+      controllers: [NotesV1Endpoint],
       providers: [NotesService],
     }).compile();
 
-    controller = module.get<NotesEndpoint>(NotesEndpoint);
+    controller = module.get<NotesV1Endpoint>(NotesV1Endpoint);
   });
 
   it('should be defined', () => {

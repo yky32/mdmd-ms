@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TagsService } from './tags.service';
-import { TagsEndpoint } from '../../endpoints/tags.endpoint';
+import { TagsV1Endpoint } from '../../endpoints/tags.v1.endpoint';
 import {ClientsModule, Transport} from "@nestjs/microservices";
 import {
   APP_CLIENT_ID_KAFKA,
@@ -27,7 +27,7 @@ import {
       },
     ]),
   ],
-  controllers: [TagsEndpoint],
+  controllers: [TagsV1Endpoint],
   providers: [TagsService]
 })
 export class TagsModule {}

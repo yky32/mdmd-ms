@@ -3,10 +3,13 @@ import {TagsService} from '../modules/tags/tags.service';
 import {CreateTagDto} from '../modules/tags/dto/create-tag.dto';
 import {UpdateTagDto} from '../modules/tags/dto/update-tag.dto';
 import {ApiTags} from "@nestjs/swagger";
+import {API_PREFIX, API_V1} from "../core/constants/index.app";
 
-@ApiTags("tags")
-@Controller('tags')
-export class TagsEndpoint {
+const prefix = API_PREFIX + API_V1 + 'tags';
+
+@ApiTags(prefix)
+@Controller(prefix)
+export class TagsV1Endpoint {
     constructor(private readonly tagsService: TagsService) {
     }
 
