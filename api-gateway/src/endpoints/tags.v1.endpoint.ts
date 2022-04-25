@@ -1,9 +1,9 @@
 import {Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common';
 import {TagsService} from '../modules/tags/tags.service';
-import {CreateTagDto} from '../modules/tags/dto/create-tag.dto';
 import {UpdateTagDto} from '../modules/tags/dto/update-tag.dto';
 import {ApiTags} from "@nestjs/swagger";
 import {API_PREFIX, API_V1} from "../core/constants/index.app";
+import {CreateTagRequestDto} from "../modules/tags/dto/request/create-tag.request.dto";
 
 let domain = 'tags';
 const prefix = API_PREFIX + API_V1 + domain;
@@ -15,7 +15,7 @@ export class TagsV1Endpoint {
     }
 
     @Post()
-    create(@Body() createTagDto: CreateTagDto) {
+    create(@Body() createTagDto: CreateTagRequestDto) {
         return this.tagsService.create(createTagDto);
     }
 

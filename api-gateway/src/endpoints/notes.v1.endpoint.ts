@@ -2,7 +2,7 @@ import {Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common'
 import {NotesService} from '../modules/notes/notes.service';
 import {UpdateNoteDto} from '../modules/notes/dto/update-note.dto';
 import {ApiTags} from "@nestjs/swagger";
-import {CreateNoteRequest} from "../modules/notes/dto/request/create-note.request";
+import {CreateNoteRequestDto} from "../modules/notes/dto/request/create-note.request.dto";
 import {API_PREFIX, API_V1} from "../core/constants/index.app";
 
 let domain = 'notes';
@@ -16,7 +16,7 @@ export class NotesV1Endpoint {
     ) {}
 
     @Post()
-    create(@Body() createNoteRequest: CreateNoteRequest) {
+    create(@Body() createNoteRequest: CreateNoteRequestDto) {
         return this.notesService.create(createNoteRequest);
     }
 
