@@ -1,6 +1,6 @@
 import {Controller} from '@nestjs/common';
 import {EventPattern} from '@nestjs/microservices';
-import {NOTE_CREATED} from "../core/constants/app.event";
+import {NOTE_TAG_ASSIGNED} from "../core/constants/app.event";
 import {NotesProcessor} from "../modules/notes/notes.processor";
 
 @Controller()
@@ -10,8 +10,8 @@ export class NotesEventPattern {
     ) {
     }
 
-    @EventPattern(NOTE_CREATED)
-    async handleOrderCreated(data: any) {
-        await this.notesProcessor.orderCreated(data.value)
+    @EventPattern(NOTE_TAG_ASSIGNED)
+    async handleNoteTagAssigned(data: any) {
+        await this.notesProcessor.noteTagAssigned(data.value)
     }
 }

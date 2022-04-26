@@ -55,12 +55,13 @@ export class NotesService {
         return `This action removes a #${id} note`;
     }
 
-    async orderCreated(data: any) {
-        let data$ = {
-            noteId: 2,
-            tagId: 1
-        };
-        let noteTag = await this.noteTagRepository.create(data$);
-        return noteTag.get()
+    async noteTagAssigned(data: any) {
+        for (let tagId of data.tagIds) {
+            let data$ = {
+                noteId: data.note.id,
+                tagId: tagId
+            }
+            await this.noteTagRepository.create(data$);
+        }
     }
 }

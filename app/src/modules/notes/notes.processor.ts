@@ -8,7 +8,7 @@ export class NotesProcessor {
     ) {
     }
 
-    async orderCreated(data: any) {
-        await this.notesService.orderCreated(data);
+    async noteTagAssigned(data: any) {
+        await this.notesService.noteTagAssigned(data);
     }
 }

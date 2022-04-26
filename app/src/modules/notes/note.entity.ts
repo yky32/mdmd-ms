@@ -38,5 +38,5 @@ export interface NoteMetadata {
 }
 
 export interface NoteContext {
-    data: string;
+    data: any;
 }
