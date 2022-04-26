@@ -6,6 +6,7 @@ import {NotesModule} from './modules/notes/notes.module';
 import {DatabaseModule} from "./core/database/database.module";
 import {FoldersModule} from './modules/folders/folders.module';
 import {TagsModule} from "./modules/tags/tags.module";
+import {appProviders} from "./app.providers";
 
 @Module({
     imports: [
@@ -16,7 +17,10 @@ import {TagsModule} from "./modules/tags/tags.module";
         FoldersModule,
     ],
     controllers: [AppController],
-    providers: [AppService]
+    providers: [
+        AppService,
+        ...appProviders
+    ]
 })
 export class AppModule {
 }

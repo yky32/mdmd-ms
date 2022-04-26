@@ -7,7 +7,10 @@ import { Exclude } from 'class-transformer';
     tableName: 'tags',
     version: true,
     timestamps: true,
-    underscored: true
+    underscored: true,
+    defaultScope: {
+        attributes: { exclude: ['version', 'updatedAt'] }
+    }
 })
 export class Tag extends Model<Tag> {
     @PrimaryKey

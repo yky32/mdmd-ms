@@ -1,4 +1,4 @@
-import {Inject, Injectable, NotFoundException} from '@nestjs/common';
+import {Inject, Injectable, InternalServerErrorException} from '@nestjs/common';
 import {CreateNoteDto} from './dto/create-note.dto';
 import {UpdateNoteDto} from './dto/update-note.dto';
 import {AUTH_SERVICE_KAFKA, NOTE_REPOSITORY, NOTE_TAG_REPOSITORY} from "../../core/constants/app.app";
@@ -40,7 +40,7 @@ export class NotesService {
         console.log(`This action returns a #${id} note`)
         let note = await this.noteRepository.findByPk(id)
         if (!note) { // if the post doesn't exit in the db, throw a 404 error
-            throw new NotFoundException("the NOTE doesn't exit")
+            throw new InternalServerErrorException("the NOTE doesn't exit")
         }
         return note.get()
     }

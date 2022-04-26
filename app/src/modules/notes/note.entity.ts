@@ -1,12 +1,16 @@
 import {AutoIncrement, BelongsToMany, Column, DataType, Model, PrimaryKey, Table} from 'sequelize-typescript';
 import {Tag} from "../tags/tag.entity";
 import {NoteTag} from "../composite/note-tag.entity";
+import {Exclude} from "class-transformer";
 
 @Table({
     tableName: 'notes',
     version: true,
     timestamps: true,
-    underscored: true
+    underscored: true,
+    defaultScope: {
+        attributes: { exclude: ['version', 'updatedAt'] }
+    }
 })
 export class Note extends Model<Note> {
     @PrimaryKey

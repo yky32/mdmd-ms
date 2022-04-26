@@ -3,6 +3,9 @@ export const DEVELOPMENT = 'dev';
 export const QA = 'qa';
 export const PRODUCTION = 'prod';
 
+// filters
+export const HTTP_EXCEPTION_FILTER = 'HTTP_EXCEPTION_FILTER';
+
 // Repository
 export const NOTE_REPOSITORY = 'NOTE_REPOSITORY';
 export const TAG_REPOSITORY = 'TAG_REPOSITORY';
