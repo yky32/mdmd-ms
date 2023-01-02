@@ -11,7 +11,7 @@ export const NOTE_REPOSITORY = 'NOTE_REPOSITORY';
 export const TAG_REPOSITORY = 'TAG_REPOSITORY';
 export const NOTE_TAG_REPOSITORY = 'NOTE_TAG_REPOSITORY';
 
-export const BROKER_ADDRESS_KAFKA = 'yky32.asuscomm.com:9092';
+export const BROKER_ADDRESS_KAFKA = 'gg';
 
 export const AUTH_SERVICE_KAFKA = 'AUTH_SERVICE';
 export const AUTH_CLIENT_ID_KAFKA = 'auth';
